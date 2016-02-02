@@ -1,3 +1,5 @@
+import random
+
 def split_words(filename):
 	text = open(filename, "r")
 	text = text.read()
@@ -16,8 +18,18 @@ def probabilities_matrix(text):
 		except IndexError:
 			return bigrams
 
+def make_tweet(text):
+	tweet = []
+	#random.seed("cathadsfs")
+	for word in random.choice(list(text.keys())):
+		tweet.append(word)
+	for i in range(23):
+		random_word = random.randint(0, len(text[(tweet[i], tweet[i+1])])-1)
+		tweet.append(text[(tweet[i], tweet[i+1])][random_word])
+	return " ".join(tweet)
 
 cats = split_words("pg7885.txt")
 ok = probabilities_matrix(cats)
+will_it_work = make_tweet(ok)
 
-print ok
+print will_it_work
