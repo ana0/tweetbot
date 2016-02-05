@@ -20,15 +20,20 @@ def probabilities_matrix(text):
 
 def make_tweet(text):
 	tweet = []
-	#random.seed("cathadsfs")
-	for word in random.choice(list(text.keys())):
+	get_start = random.choice(list(text.keys()))
+	while not get_start[0].istitle():
+		get_start = random.choice(list(text.keys()))
+	for word in get_start:
 		tweet.append(word)
-	for i in range(23):
-		random_word = random.randint(0, len(text[(tweet[i], tweet[i+1])])-1)
-		tweet.append(text[(tweet[i], tweet[i+1])][random_word])
+	# for i in range(23):
+	while not tweet[-1].endswith("."):
+		# random_word = random.randint(0, len(text[(tweet[i], tweet[i+1])])-1)
+		# tweet.append(text[(tweet[i], tweet[i+1])][random_word])
+		random_word = random.randint(0, len(text[(tweet[-2], tweet[-1])])-1)
+		tweet.append(text[(tweet[-2], tweet[-1])][random_word])
 	return " ".join(tweet)
 
-cats = split_words("pg7885.txt")
+cats = split_words("pg41905.txt")
 ok = probabilities_matrix(cats)
 will_it_work = make_tweet(ok)
 
